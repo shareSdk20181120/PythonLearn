@@ -1,0 +1,60 @@
+Python表示数据集合的类型：List、tuple、dic、set
+list是一种有序的集合，可以随时添加、删除其中的元素。tuple是一个不可变的有序集合，一旦定义就不可以更改指向
+
+list操作方法
+	chassmates=["lili","xiaoming","xiaohong"]
+	len(chassmates)获取list 的长度，
+	chassmates.append("adg") ---在结尾追加一个元素
+	chassmates.insert(1,"jack")--在指定位置添加元素
+	chassmates.pop() --删除末尾的元素
+	chassmates.pop(1)--删除指定位置的元素
+	chassmates[1]="sala"--更换指定位置的元素
+	chassmates=["aple",1,true]	--list可以存放不同的数据类型的元素
+	chassmates=["ssl",["ss","aa"],"ddd"]	--list里可以嵌套list，若获取ss，使用chassmates[1][0]
+	l=[]
+	chassmates.sort()
+	可以使用索引0开始获取元素，使用-1获取最后一个元素，-2获取倒数第二个
+
+tuple操作方法
+	tt=("ll","bb","cc")
+	他一旦初始化就不能修改，也没有applend，insert()方法，可以使用tt[0]获取值，但是不能修改这个元素的值。
+	不可变的tuple，代码更安全，如果有可能，能用tuple代替list就用tuple
+	tt=()
+	tt=(1,)	--注意只有一个元素时，后面要加逗号，否则会有歧义的。
+	tt=(1,2,[22,33])	--不变的tuple里面有个可变的list，这里可以修改list，因为tuple 的指向不改变
+dict字典
+	Python内置字典的支持，全称dictionary，在其他语言中也称map，使用键值对存储，查找速度非常快
+	d={"llil":85,"xixi":70}	--声明一个字典
+	d["xixi"]=60	--修改某个键对应的值
+	d.pop(xixi)	--删除
+	d["pipi"]=90	--添加新的
+	查找某个键是否存在字典中
+		方法1		"xixi" in d  --使用in判断key是否在字典d中，返回true orfalse		
+		方法2		d.get("xixi")	--不存在返回none，或者自己自定的值,返回none时Python的交互环境不显示结果
+					d.get("xixi",-1)
+	和list相比，dic的特点
+		查找和插入的速度快，不会随着key 的增加而变慢
+		需要占用大量的内存，内存相对浪费的多
+	而list相反
+		查找和插入的速度随着元素的增加会变得更慢
+		占用空间小，浪费内存少
+	所以Dic是一个以空间换时间的一种方法，他的key是一个不可变对象，在python中字符串和整数等都不是可变的，list是可变的，不能作为key
+set
+	他也是一组集合，一组key的集合，不存储value，
+	要创建一个list，需要提供一个list作为输入集合，他会自动的过滤重复的key.可以把set看做数学意义上的无序和无重复原声带集合，可以取俩个set 的交集和并集操作
+	s=set([1,2,3])
+	s ---{1,2,3}
+	s.add(4)
+	s.remove(4)
+	s1=set([1,2,3])
+	s2=set([2,3,5])
+	s1 |s2	--{1,2,3,5}
+	s1&s2	--{2,3}
+
+	再议不可变对象
+		a="abc"
+		b=a.replace("a","A")
+		print(b)	--Aac
+		print(a)	-abc
+
+		出现这种情况是因为 字符串是不可变 对象，第二行是从新建了一个字符串Abc，并让b指向他，而a还是只想的abc

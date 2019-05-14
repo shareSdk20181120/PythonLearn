@@ -1,0 +1,58 @@
+条件判断
+	if x :
+		<执行1>
+	elif y:
+		<执行2>
+	else:
+		<执行3>
+	如果x是非零值、非空字符串、非空list等，就判断为true，否则为false
+	input()读取用户的输入，返回的值是字符串，使用int()函数将字符串转换为整数，如果判断输入的合法的数字呢？
+	birth=int(input("plase input birth"))
+	if birth<2000
+		print("00前")
+	else
+		print("00后")
+
+循环
+	Python有两个循环，一个 for...in  一个是while循环
+	for...in练习
+		names=["1","2"]
+		for name in names:
+			print(name)
+
+		sum=0
+		for x in [1,1,3,4,4,5]
+			sum=x+sum
+		print(sum)
+
+		python提供了一个range()函数，可以生成一个整数系列。再通过list()函数将其转化为list，
+		list(range(5))	--【0,1,2,3,4】
+	while练习
+		sum=0
+		n=99
+		while n>0:
+			sum=sum+n
+			n=n-2
+		print(sum)
+
+		利用循环依次对list中的每个名字打印出Hello, xxx!：
+		L = ['Bart', 'Lisa', 'Adam']
+		for x in L:
+		    print("hello,%s!"%x)
+	break提前退出循环
+		i=0
+		while i<10:
+			if(i>5) :
+				break
+			print(i)
+		print("end while")
+	continue跳过某些循环
+		i=0
+		while i<10:
+			if(i%2==0) :
+				continue
+			print(i)
+		print("end while")
+
+
+
