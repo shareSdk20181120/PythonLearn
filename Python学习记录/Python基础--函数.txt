@@ -1,0 +1,99 @@
+内置函数
+	Python官网提供了内置函数的查看文档：http://docs.python.org/3/library/functions.html#abs
+	也可以在交互命令行通过help(abs)查看abs函数的帮助信息
+	int()	--内置的数据类型转换函数
+	函数名其实就是一个指向函数对象的引用，完全可以把函数名赋给一个变量，相当于给这个函数起一个"别名"：
+	>>>a=abs
+	>>>a(-1)
+	1
+	hex()函数把一个整数转为十六进制表示的字符串
+
+定义函数
+	使用def语句，依次写出函数名，参数、冒号：然后再缩进块中编写函数体，函数返回值用return语句。若没有return语句，函数执行完也会返回None,return None 可简写return
+	def myAbas(x):
+		if(x>=0):
+			return x
+		else:
+			return -x
+
+	在Python交互环境中定义函数时，会出现...的提示，定义函数结束后需要按两次回车才能回到>>>提示符下
+	若你将上面的函数保存到abstest.py文件，可以启用python解释器，使用from abstest import myAbs 来导入myAbs函数，注意这个不写.py
+	>>>from abstest import myAbs
+	>>>myAbs(-9)
+	9
+
+	空函数
+		若想定一个什么都不做的函数，可以用pass语句：
+		def nop():
+			pass
+		pass只是用来占位的，比如还没想好怎么写，先放这个，让代码能运行起来。
+		if age>=18
+			pass
+	参数检查
+		def myAbas(x):
+			if not isinstance(x,(int,float));
+				raise TypeError("bad operand type")
+			if(x>=0):
+				return x
+			else:
+				return -x
+	返回多个值
+		import math	--导入math包，并允许后面的代码引用里面的函数
+		def move(x,y,step,angle=0)
+			nx=x+step*math.cos(angle)
+			ny=y+step*math.sin(angle)
+			return nx,ny
+		>>>x,y=move(100,100,60,math.pi/6)
+		>>>print(x,y)
+		151.96 70
+		其实Python返回的是tuple，在语法上一个tuple可以省略括号，而多个变量可以同时接受一个tuple，按位置赋给对应的值。所以python返回多个值其实就是返回一个tuple，上面也可以写为
+		>>>r=move(100,100,60,math.pi/6)
+		print(r)
+		(151.96 ,70)
+函数的参数
+		函数的参数可以是 必选参数、默认参数、可变参数、关键字参数
+		位置参数
+			def power(x):
+				return x*x
+			这里的x就是一个位置参数
+
+			def power(x,n)
+				s=1
+				while n>0:
+					s=s*x
+					n=n-1
+				return s
+			>>>power(2,3)
+		默认参数
+			def power(x,n=2)
+				s=1
+				while n>0:
+					s=s*x
+					n=n-1
+				return s
+			>>>power(2)
+
+			默认参数很有用，使用不当 也会掉入坑中，
+			def add_end(L=[])
+				L.append("End")
+				return L
+			当你正常调用时，结果时候不错
+				>>>add_end([1,2,4])
+				[1,2,4,"End"]
+				>>>add_end(["x","y"])
+				["x","y","End"]
+			当你使用默认的，一开始对的，再次调用，结果就不对了
+				>>> add_end()
+				['END']		
+				>>> add_end()
+				['END', 'END']
+				>>> add_end()
+				['END', 'END', 'END']
+			所以通过以上牢记一点，默认参数必须指向不改对象，这就是不变对象str，None存在的理由，这样可以减少由于修改数据导致的错误
+				所以以上可以修改为如下
+				def add_end(L=None)
+					if L is None
+						L=[]
+					L.append("End")
+					return L
+			由于对象不变，多任务环境下同读取对象不需要加锁，同时读取一点问题都没有，我们在编写程序时，尽量设计成不变对象

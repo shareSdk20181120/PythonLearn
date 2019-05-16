@@ -1,0 +1,108 @@
+函数的参数
+	可变参数--即传入的参数是可变的，只需要在参数前面加一个*号,在调用函数时，就不需要组装成list和tuple.
+		允许你传入0或者任意个参数，这些可变参数在函数调用时自动组装为tuple
+		如果有一个list或者tuple，要调可变参数,在list或tuple前面加一个*号
+		def calc(numbers):
+			sum=0
+			for n in numbers:
+				sum=sum+n*n
+			return sum
+		调用的时候需要先组装一个list或者tuple
+		calc([1,2,3])
+		cac((1,2,3))
+
+		将上述函数定义为可变参数，
+			def calc(*numbers):
+				sum=0
+				for n in numbers:
+					sum=sum+n*n
+				return sum
+
+			>>>calc()
+			>>>calc(1,3)
+
+			如果有一个list或者tuple，要调可变参数,可使用如下方法，但是这
+			>>>nums=[1,3,4]
+			>>>calc(nums[0],nums[1],nums[2])
+
+			但是这样太繁琐了，Python允许你在list或tuple前面加一个*号
+			>>>nums=[1,3,4]
+			>>>calc(*nums)
+	关键字参数
+		允许你传入0或者任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict
+		def person(name,age,**kw):
+			print("name:",name,"age:",age,"other：",kw)
+		>>>person("lilli",21)
+		>>>person("tt",32,city="Beijing")
+		>>>person("tt",32,city="Beijing",Job="Engineer")
+
+		>>>extra={"City":"Beijing","Job":"Engineer"}
+		>>>person("ff",35,city=extra["City"],job=extra["Job"])  或者person("ff",35,**extra)
+		**extra表示把extra这个dict的所有key-value用关键字参数传入的函数的**kw,kw是extra的一份拷贝，对kw的改动不会影响到函数外的extra
+
+		在函数内部检查出入的参数
+		def person(name,age,**kw):
+			if "city" in kw:
+				pass
+			if "job" in kw:
+				pass
+			print("name: ",name,"age:",age,"other: "+kw)
+	命名关键字参数
+		如果要限制关键字参数名字，就可以用命名关键字参数，例如只接受city和job作为关键字参数
+		def person(name,age,*,city,job):
+			print(name,age,city,job)
+		person("aa",33,city="Beijing",job="Engineer")
+		和关键字参数**kw不同，命名关键字参数需要个特殊分隔符*,*后面的参数被视为命名关键字参数
+
+		如果在函数定义中已经有一个可变参数，后面跟着命名关键字参数就不需要一个特殊的分隔符*
+		def person(name,*args,city="beijing",job):
+			print(name,args,city,job)
+		print("aa",33,job="Engineer")//由于city具有默认值，可不传入city参数
+
+	参数组合
+		函数定义可以用必选参数，默认参数，可变参数，关键字参数和命名关键字参数，这五种参数可以组合使用，但是请注意，参数定义的顺序必选是：必选参数，默认参数，可变参数，命名关键字参数、关键字参数
+
+		def f1(a,b,c=0,*args,**kw):
+			print(a,b,c,args,kw)
+		def f2(a,b,c=0,*,d,**kw)
+
+		f1(1,3)
+		f1(3,4,3,"a","b")
+		f1(3,4,3,"a","b",x=99)
+		f1(3,4,x=99)
+		f2(3,t,d="aaa",ext="none")
+
+		>>>args=(2,4,5,4)
+		>>>kw={"d":00,"y":35}
+		>>>f1(*args,**kw)
+		a=2,b=4,c=5,args=(4,) kw={"d":00,"y":35}
+
+		>>>args=(2,4,5)
+		>>>kw={"d":20,"y":35}
+		>>>f2(*args,**kw)
+		a=2,b=4,c=5,args=20,kw={"y":35}
+
+		所以任何函数，都可以通过类似func(*args,**kw)的形式调用它，无论它的参数是如何定义的
+
+		小结
+			Python的函数具有非常灵活的参数形态，既可以实现简单的调用，又可以传入非常复杂的参数。
+
+			默认参数一定要用不可变对象，如果是可变对象，程序运行时会有逻辑错误！
+
+			要注意定义可变参数和关键字参数的语法：
+
+			*args是可变参数，args接收的是一个tuple；
+
+			**kw是关键字参数，kw接收的是一个dict。
+
+			以及调用函数时如何传入可变参数和关键字参数的语法：
+
+			可变参数既可以直接传入：func(1, 2, 3)，又可以先组装list或tuple，再通过*args传入：func(*(1, 2, 3))；
+
+			关键字参数既可以直接传入：func(a=1, b=2)，又可以先组装dict，再通过**kw传入：func(**{'a': 1, 'b': 2})。
+
+			使用*args和**kw是Python的习惯写法，当然也可以用其他参数名，但最好使用习惯用法。
+
+			命名的关键字参数是为了限制调用者可以传入的参数名，同时可以提供默认值。
+
+			定义命名的关键字参数在没有可变参数的情况下不要忘了写分隔符*，否则定义的将是位置参数。

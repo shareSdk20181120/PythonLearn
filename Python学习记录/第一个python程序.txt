@@ -1,0 +1,32 @@
+第一个python程序
+	命令行模式
+		windows开始菜单下选择命令提示符，进入到命令模式，它的提示类似c:\>
+		可以在该命令模式直接执行python x.py运行x.py文件，注意这个.py文件必须在当前目录下。如不在当前目录下就需要切换到当前目录
+		切换目录可以使用如下命令
+			 d:Demo\Python
+	Python交互模式
+		在命令行模式下敲命令python，进入到Python交互模式，它的提示符>>> 。	在这个模式下 输入exit()并回车，就退出交互模式，回到命令行模式
+		也可以通过Python(command line)进入交互模式，但是输入exit()后窗口就直接关闭了
+		在该模式下可以输入代码，并立即得到结果
+		>>> 100+200
+		300
+		>>> print("hello,world")
+		hello,world
+	使用文本编译器
+		Sublime Text
+		Notepad++
+		注意 不能用world和windows自带的笔记本，world保存的不是纯文本文件，而记事本会故作聪明的在文件的开始地方加上几个特殊字符(utf-8 bom),结果会导致程序运行出现莫名的错误
+	直接运行py文件
+		在windows中不可以，但是max和linux可以，方法是在.py文件的第一行加上一个特殊的注释：
+		#!/usr/bin/env python3
+		print("hello,world")
+		然后通过命令给hello.py以执行权限
+		$chmod a+x hello.py
+	输入和输出
+		输出
+			print()输入字符串，可以再屏幕上看到指定的文字
+			print("hello")
+			print("hello","I am lili")
+		输入
+			name=input()
+			name-input("please input your name:")
